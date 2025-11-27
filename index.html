@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Arunesh Waran - AI Engineer specializing in Deep Learning, Computer Vision, and NLP. Building intelligent systems that bridge data and human experience.">
+    <meta name="keywords" content="AI Engineer, Machine Learning, Deep Learning, Python, TensorFlow, PyTorch, Coimbatore">
+    <meta name="author" content="Arunesh Waran">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>Arunesh Waran | AI Engineer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <!-- Lenis (Smooth Scroll) -->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #f3f3f3;
+            --accent-color: #c0c0c0; /* Silver */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Typography */
+        .font-serif { font-family: 'Playfair Display', serif; }
+        
+        /* Smooth Scroll & Layout */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-scrolling iframe { pointer-events: none; }
+
+        /* WebGL Background */
+        #webgl-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* Custom Cursor */
+        #cursor {
+            position: fixed;
+            top: 0; left: 0;
+            width: 20px; height: 20px;
+            background: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: width 0.3s, height 0.3s;
+        }
+        body.hovering #cursor {
+            width: 80px; height: 80px;
+        }
+
+        /* Utility Classes */
+        .reveal-text {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            will-change: transform;
+        }
+        .char {
+            display: inline-block;
+            transform-origin: 50% 100%;
+        }
+
+        /* Image Reveal Curtain */
+        .image-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .image-curtain {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #1a1a1a;
+            z-index: 10;
+            transform-origin: bottom;
+        }
+        .parallax-img {
+            will-change: transform;
+            transform: scale(1.2);
+        }
+
+        /* Magnetic Button */
+        .magnetic-btn {
+            display: inline-block;
+            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Grain Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9000;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="cursor"></div>
+    <div class="noise-overlay"></div>
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 bg-[#050505] z-50 flex items-center justify-center flex-col">
+        <div class="font-serif text-6xl md:text-8xl text-white italic overflow-hidden">
+            <span class="loader-text block transform translate-y-full">Arunesh</span>
+        </div>
+        <div class="w-64 h-[1px] bg-gray-800 mt-8 relative overflow-hidden">
+            <div id="loader-line" class="absolute top-0 left-0 h-full bg-white w-0"></div>
+        </div>
+        <div id="loader-count" class="font-mono text-xs mt-2 text-gray-500">00</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-40 px-6 py-6 flex justify-between items-center mix-blend-difference text-white">
+        <a href="#" class="text-sm font-bold tracking-widest uppercase hover-target magnetic-btn">Arunesh Waran.</a>
+        <div class="hidden md:flex gap-8 text-xs font-medium tracking-widest uppercase">
+            <a href="#about" class="hover-target hover:opacity-50 transition-opacity">Profile</a>
+            <a href="#work" class="hover-target hover:opacity-50 transition-opacity">Selected Works</a>
+            <a href="#contact" class="hover-target hover:opacity-50 transition-opacity">Contact</a>
+        </div>
+        <a href="mailto:atusarun@gmail.com" class="text-xs border border-white/30 rounded-full px-4 py-2 hover:bg-white hover:text-black transition-all hover-target magnetic-btn">
+            Let's Talk
+        </a>
+    </nav>
+
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
+            
+            <!-- HERO -->
+            <section class="min-h-screen flex flex-col justify-center px-6 md:px-20 pt-20 relative">
+                <div class="relative z-10">
+                    <div class="overflow-hidden">
+                        <h1 class="hero-title font-serif text-[13vw] leading-[0.85] text-white mix-blend-overlay">
+                            ARUNESH
+                        </h1>
+                    </div>
+                    <div class="overflow-hidden">
+                        <h1 class="hero-title font-serif text-[13vw] leading-[0.85] text-white italic ml-[5vw] mix-blend-overlay">
+                            WARAN
+                        </h1>
+                    </div>
+                    
+                    <div class="mt-12 flex flex-col md:flex-row justify-between items-start md:items-end w-full max-w-7xl mx-auto border-t border-white/10 pt-6">
+                        <div class="max-w-sm hero-fade opacity-0 translate-y-10">
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                Designing intelligence. An AI Engineer bridging the gap between raw data and human experience. Based in Coimbatore.
+                            </p>
+                        </div>
+                        <div class="mt-8 md:mt-0 hero-fade opacity-0 translate-y-10">
+                            <span class="text-xs font-mono text-gray-500 block mb-2">SCROLL TO EXPLORE</span>
+                            <div class="w-[1px] h-16 bg-white/20 mx-auto animate-pulse"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABOUT -->
+            <section id="about" class="py-32 px-6 md:px-20">
+                <div class="flex flex-col md:flex-row gap-20">
+                    <div class="w-full md:w-1/3">
+                        <span class="text-xs font-mono text-gray-500 uppercase tracking-widest block mb-4">[ 01 — The Mind ]</span>
+                        <div class="image-container w-full aspect-[3/4] grayscale hover:grayscale-0 transition-all duration-700">
+                             <!-- Abstract geometric placeholder representing AI -->
+                             <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2574&auto=format&fit=crop" class="parallax-img w-full h-full object-cover">
+                             <div class="image-curtain"></div>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-2/3 flex flex-col justify-center">
+                        <h2 class="split-text font-serif text-4xl md:text-6xl leading-tight mb-8">
+                            I craft digital brains. Combining <span class="italic text-gray-400">Deep Learning</span> algorithms with elegant engineering.
+                        </h2>
+                        <div class="grid grid-cols-2 gap-8 text-sm text-gray-400">
+                            <div class="fade-up">
+                                <h3 class="text-white font-medium mb-2 uppercase tracking-wide">Education</h3>
+                                <p>Sri Shakthi Institute of Engineering</p>
+                                <p>B.Tech AI & ML (2023-2027)</p>
+                                <p class="text-white/60 mt-1">CGPA: 8.1 / 10</p>
+                            </div>
+                            <div class="fade-up">
+                                <h3 class="text-white font-medium mb-2 uppercase tracking-wide">Expertise</h3>
+                                <p>Python, TensorFlow, PyTorch</p>
+                                <p>Generative AI, NLP, LLMs</p>
+                                <p>Full Stack (Flask, React)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WORK -->
+            <section id="work" class="py-20 px-6 md:px-20">
+                <div class="flex items-end justify-between mb-20 border-b border-white/10 pb-6">
+                    <h2 class="text-6xl md:text-8xl font-serif">Selected Works</h2>
+                    <span class="text-xs font-mono text-gray-500 mb-4">[ 02 — Portfolio ]</span>
+                </div>
+
+                <div class="space-y-32">
+                    
+                    <!-- Project 01 -->
+                    <a href="https://github.com/ANONYMOUSZED-beep/aerial-vehicle-detection" target="_blank" rel="noopener noreferrer" class="project-item group cursor-pointer hover-target block">
+                        <div class="flex flex-col md:flex-row justify-between items-baseline mb-6">
+                            <h3 class="text-4xl md:text-5xl font-medium">Sky Watcher</h3>
+                            <span class="text-sm text-gray-500 font-mono mt-2 md:mt-0">Python / YOLO / OpenCV</span>
+                        </div>
+                        <div class="image-container w-full h-[60vh] md:h-[80vh]">
+                            <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?q=80&w=2574&auto=format&fit=crop" class="parallax-img w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+                            <div class="image-curtain"></div>
+                        </div>
+                        <div class="flex justify-between mt-4 text-sm text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <p>Real-time Aerial Vehicle Detection & Classification</p>
+                            <p>2024</p>
+                        </div>
+                    </a>
+
+                    <!-- Project 02 -->
+                    <a href="https://github.com/ANONYMOUSZED-beep/semantic_book_recommender" target="_blank" rel="noopener noreferrer" class="project-item group cursor-pointer hover-target block">
+                        <div class="flex flex-col md:flex-row justify-between items-baseline mb-6">
+                            <h3 class="text-4xl md:text-5xl font-medium">Biblio AI</h3>
+                            <span class="text-sm text-gray-500 font-mono mt-2 md:mt-0">NLP / Scikit-Learn</span>
+                        </div>
+                        <div class="image-container w-full h-[60vh] md:h-[80vh]">
+                            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2670&auto=format&fit=crop" class="parallax-img w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+                            <div class="image-curtain"></div>
+                        </div>
+                        <div class="flex justify-between mt-4 text-sm text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <p>Semantic Recommendation Engine using Cosine Similarity</p>
+                            <p>2023</p>
+                        </div>
+                    </a>
+
+                    <!-- Project 03 -->
+                    <a href="https://github.com/ANONYMOUSZED-beep/project-neer-dashboard" target="_blank" rel="noopener noreferrer" class="project-item group cursor-pointer hover-target block">
+                        <div class="flex flex-col md:flex-row justify-between items-baseline mb-6">
+                            <h3 class="text-4xl md:text-5xl font-medium">Project Neer</h3>
+                            <span class="text-sm text-gray-500 font-mono mt-2 md:mt-0">IoT / Flask / MongoDB</span>
+                        </div>
+                        <div class="image-container w-full h-[60vh] md:h-[80vh]">
+                            <img src="james-donaldson-toPRrcyAIUY-unsplash.jpg" class="parallax-img w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+                            <div class="image-curtain"></div>
+                        </div>
+                        <div class="flex justify-between mt-4 text-sm text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <p>Water Resource Management Dashboard</p>
+                            <p>2024</p>
+                        </div>
+                    </a>
+
+                </div>
+            </section>
+
+            <!-- SKILLS (Horizontal Marquee) -->
+            <section class="py-20 border-y border-white/5 bg-[#0a0a0a]">
+                <div class="marquee-container overflow-hidden whitespace-nowrap">
+                    <div class="marquee-content inline-block text-[10vw] font-serif italic text-white/10 leading-none">
+                        Machine Learning — Neural Networks — Computer Vision — Natural Language Processing — Data Science — 
+                        Machine Learning — Neural Networks — Computer Vision — Natural Language Processing — Data Science —
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTACT -->
+            <section id="contact" class="min-h-screen flex flex-col justify-between px-6 md:px-20 py-20 bg-[#050505]">
+                <div class="w-full h-[1px] bg-white/10 mb-20"></div>
+                
+                <div class="flex flex-col items-center text-center">
+                    <p class="text-sm font-mono text-gray-500 mb-8 uppercase tracking-widest">[ 03 — Contact ]</p>
+                    <h2 class="font-serif text-[10vw] leading-none mb-10 mix-blend-overlay hover:italic transition-all duration-500 cursor-pointer hover-target">
+                        <a href="mailto:atusarun@gmail.com">Let's Create.</a>
+                    </h2>
+                    <div class="flex gap-8 text-sm uppercase tracking-wider">
+                        <a href="https://www.linkedin.com/in/arunesh-waran-2a6846300/" target="_blank" rel="noopener noreferrer" class="hover:text-gray-400 hover-target magnetic-btn">LinkedIn</a>
+                        <a href="https://github.com/ANONYMOUSZED-beep" target="_blank" rel="noopener noreferrer" class="hover:text-gray-400 hover-target magnetic-btn">GitHub</a>
+                        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="hover:text-gray-400 hover-target magnetic-btn">Resume</a>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-end mt-20 text-xs text-gray-600 font-mono">
+                    <div>
+                        <p>COIMBATORE, INDIA</p>
+                        <p>LOCAL TIME: <span id="time-display">00:00</span></p>
+                    </div>
+                    <div>
+                        <p>© 2025 ARUNESH WARAN</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script> <!-- Note: SplitText is Club GSAP, will use vanilla JS fallback -->
+
+    <script>
+        // --- 1. THREE.JS FLUID BACKGROUND ---
+        // Simulating a classy liquid smoke/fog effect
+        const initThreeJS = () => {
+            const canvas = document.querySelector('#webgl-canvas');
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x050505);
+
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Particles
+            const geometry = new THREE.BufferGeometry();
+            const count = 300;
+            const positions = new Float32Array(count * 3);
+            const sizes = new Float32Array(count);
+
+            for (let i = 0; i < count; i++) {
+                positions[i * 3 + 0] = (Math.random() - 0.5) * 20; // x
+                positions[i * 3 + 1] = (Math.random() - 0.5) * 20; // y
+                positions[i * 3 + 2] = (Math.random() - 0.5) * 10; // z
+                sizes[i] = Math.random();
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('aScale', new THREE.BufferAttribute(sizes, 1));
+
+            // Custom Shader Material for "Ethereal Smoke"
+            const material = new THREE.ShaderMaterial({
+                uniforms: {
+                    uTime: { value: 0 },
+                    uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) }
+                },
+                vertexShader: `
+                    uniform float uTime;
+                    uniform float uPixelRatio;
+                    attribute float aScale;
+                    varying float vAlpha;
+
+                    void main() {
+                        vec3 pos = position;
+                        // Organic wave motion
+                        pos.y += sin(uTime * 0.2 + pos.x * 0.5) * 0.5;
+                        pos.x += cos(uTime * 0.3 + pos.y * 0.5) * 0.5;
+                        
+                        vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+                        gl_Position = projectionMatrix * mvPosition;
+                        
+                        // Size attenuation
+                        gl_PointSize = 400.0 * aScale * uPixelRatio / -mvPosition.z;
+                        
+                        // Fade based on depth
+                        vAlpha = smoothstep(10.0, 0.0, -mvPosition.z);
+                    }
+                `,
+                fragmentShader: `
+                    varying float vAlpha;
+                    
+                    void main() {
+                        // Soft circle
+                        float r = distance(gl_PointCoord, vec2(0.5));
+                        float strength = 1.0 - step(0.5, r);
+                        strength = pow(1.0 - r * 2.0, 2.0); // Soft fade
+                        
+                        vec3 color = vec3(0.9, 0.9, 0.95); // Off-white/Silver
+                        
+                        gl_FragColor = vec4(color, strength * 0.05 * vAlpha); // Very transparent
+                    }
+                `,
+                transparent: true,
+                depthWrite: false,
+                blending: THREE.AdditiveBlending
+            });
+
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            // Animate
+            const clock = new THREE.Clock();
+
+            const tick = () => {
+                const elapsedTime = clock.getElapsedTime();
+                material.uniforms.uTime.value = elapsedTime;
+                
+                // Slow rotation
+                particles.rotation.y = elapsedTime * 0.02;
+                particles.rotation.z = elapsedTime * 0.01;
+
+                renderer.render(scene, camera);
+                requestAnimationFrame(tick);
+            }
+            tick();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                material.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio, 2);
+            });
+        }
+
+
+        // --- 2. GSAP & ANIMATIONS ---
+        window.addEventListener("load", () => {
+            initThreeJS();
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Time Display
+            setInterval(() => {
+                const now = new Date();
+                document.getElementById('time-display').innerText = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            }, 1000);
+
+            // Preloader Logic
+            const tl = gsap.timeline();
+            
+            // Counter
+            let count = { val: 0 };
+            gsap.to(count, {
+                val: 100,
+                duration: 2,
+                ease: "power2.inOut",
+                onUpdate: () => {
+                    document.getElementById('loader-count').innerText = Math.floor(count.val).toString().padStart(2, '0');
+                }
+            });
+
+            tl.to("#loader-line", { width: "100%", duration: 2, ease: "power2.inOut" })
+              .to(".loader-text", { y: "0%", duration: 1, ease: "power3.out" }, "-=1.5")
+              .to("#preloader", { 
+                  clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
+                  duration: 1, 
+                  ease: "power4.inOut",
+                  delay: 0.5
+              })
+              // Hero Entry
+              .from(".hero-title", { 
+                  y: "110%", 
+                  duration: 1.5, 
+                  ease: "power4.out", 
+                  stagger: 0.1 
+              })
+              .to(".hero-fade", { opacity: 1, y: 0, duration: 1, stagger: 0.2 }, "-=1");
+
+
+            // Scroll Animations setup
+            initScrollAnimations();
+
+            // Lenis
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                smooth: true,
+            });
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+            
+            // Integrate Lenis with ScrollTrigger
+            gsap.ticker.add((time)=>{
+                lenis.raf(time * 1000);
+            });
+            gsap.ticker.lagSmoothing(0);
+        });
+
+        function initScrollAnimations() {
+            // Text Splitting (Vanilla JS fallback since SplitText is paid)
+            document.querySelectorAll(".split-text").forEach(el => {
+                const text = el.innerText;
+                el.innerHTML = text.split(" ").map(word => `<span class="inline-block overflow-hidden"><span class="inline-block reveal-word translate-y-full">${word}&nbsp;</span></span>`).join("");
+            });
+
+            // Animate Split Text
+            gsap.utils.toArray(".split-text").forEach(el => {
+                gsap.to(el.querySelectorAll(".reveal-word"), {
+                    y: 0,
+                    duration: 1,
+                    ease: "power4.out",
+                    stagger: 0.05,
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 80%"
+                    }
+                });
+            });
+
+            // Fade Up Elements
+            gsap.utils.toArray(".fade-up").forEach(el => {
+                gsap.from(el, {
+                    y: 30,
+                    opacity: 0,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%"
+                    }
+                });
+            });
+
+            // Image Reveal Curtain
+            gsap.utils.toArray(".image-container").forEach(container => {
+                let curtain = container.querySelector(".image-curtain");
+                let img = container.querySelector(".parallax-img");
+
+                let tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: container,
+                        start: "top 80%"
+                    }
+                });
+
+                tl.to(curtain, { height: 0, duration: 1.2, ease: "power4.inOut" })
+                  .from(img, { scale: 1.4, duration: 1.5, ease: "power2.out" }, "-=1.2");
+                
+                // Parallax Effect
+                gsap.to(img, {
+                    yPercent: 20,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: container,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                });
+            });
+
+            // Marquee
+            gsap.to(".marquee-content", {
+                xPercent: -50,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".marquee-container",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 0.5
+                }
+            });
+        }
+
+        // --- 3. MOUSE INTERACTIONS ---
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const hoverTargets = document.querySelectorAll('.hover-target');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        hoverTargets.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+
+        // Magnetic Buttons
+        const magnets = document.querySelectorAll('.magnetic-btn');
+        magnets.forEach((magnet) => {
+            magnet.addEventListener('mousemove', (e) => {
+                const rect = magnet.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                magnet.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
+
+            magnet.addEventListener('mouseleave', () => {
+                magnet.style.transform = 'translate(0px, 0px)';
+            });
+        });
+
+    </script>
+</body>
+</html>
