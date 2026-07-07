@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arunesh Waran — Résumé</title>
+    <meta name="description" content="Résumé of Arunesh Waran, AI, ML & Web Application Developer based in Coimbatore, India." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2312100f'/%3E%3Ctext x='50' y='72' font-family='Arial Black,sans-serif' font-size='64' font-weight='900' fill='%23e02b10' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <style>
+      @import url("https://db.onlinewebfonts.com/c/38c9851a552c219fba7878035cef1a1c?family=Britanica-Black");
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+      :root { --red: #e02b10; --ink: #17130f; --muted: #6a635b; --line: #e6e1da; --display: "Britanica-Black","Arial Black",sans-serif; --sans: "Inter",system-ui,sans-serif; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: var(--sans); color: var(--ink); background: #ece8e1; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+      a { color: var(--red); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      .bar { position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center; padding: 14px clamp(16px, 4vw, 40px); background: var(--ink); color: #fff; }
+      .bar a.back { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: 0.04em; color: #fff; }
+      .bar .print { border: 1px solid rgba(255,255,255,0.4); border-radius: 999px; padding: 9px 18px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; cursor: pointer; background: transparent; font-family: inherit; }
+      .bar .print:hover { background: var(--red); border-color: var(--red); }
+
+      .sheet { max-width: 860px; margin: 28px auto; background: #fff; padding: clamp(28px, 6vw, 64px); box-shadow: 0 20px 60px -30px rgba(0,0,0,0.4); }
+
+      header.top { border-bottom: 3px solid var(--ink); padding-bottom: 20px; margin-bottom: 24px; }
+      header.top h1 { font-family: var(--display); font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 0.9; letter-spacing: -0.02em; text-transform: uppercase; }
+      header.top .title { color: var(--red); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; font-size: 13px; margin-top: 8px; }
+      header.top .contact { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); }
+
+      section { margin-bottom: 26px; }
+      h2 { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); font-weight: 700; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+      p.summary { font-size: 14.5px; color: #2c2823; }
+
+      .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+      .chips span { font-size: 12px; font-weight: 500; padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; color: #2c2823; }
+
+      .item { margin-bottom: 16px; }
+      .item .h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+      .item .h strong { font-size: 15px; font-weight: 700; }
+      .item .h em { font-style: normal; font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+      .item .sub { font-size: 13px; color: var(--red); font-weight: 500; margin: 2px 0 6px; }
+      .item ul { list-style: none; }
+      .item ul li { position: relative; padding-left: 16px; font-size: 13.5px; color: #33302c; margin-bottom: 4px; }
+      .item ul li::before { content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+      .item .tools { margin-top: 6px; font-size: 12.5px; color: var(--muted); }
+      .item .tools b { color: var(--ink); }
+
+      .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px 24px; }
+      .skills-grid p { font-size: 13.5px; }
+      .skills-grid b { color: var(--red); }
+
+      .certs-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px 20px; }
+      .certs-list p { font-size: 13.5px; } .certs-list b { font-weight: 600; }
+
+      @media print {
+        body { background: #fff; }
+        .bar { display: none; }
+        .sheet { margin: 0; box-shadow: none; max-width: none; padding: 0; }
+        a { color: var(--ink); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bar">
+      <a class="back" href="index.html">← Back to portfolio</a>
+      <button class="print" onclick="window.print()">Download / Print PDF</button>
+    </div>
+
+    <div class="sheet">
+      <header class="top">
+        <h1>Arunesh Waran</h1>
+        <div class="title">AI, ML &amp; Web Application Developer</div>
+        <div class="contact">
+          <span>Coimbatore, Tamil Nadu, India</span>
+          <span><a href="mailto:atusarun@gmail.com">atusarun@gmail.com</a></span>
+          <span>+91 63698 80767</span>
+          <span><a href="https://www.linkedin.com/in/arunesh-waran-2a6846300/" target="_blank" rel="noopener noreferrer">LinkedIn</a></span>
+          <span><a href="https://github.com/ANONYMOUSZED-beep" target="_blank" rel="noopener noreferrer">GitHub</a></span>
+        </div>
+      </header>
+
+      <section>
+        <h2>Summary</h2>
+        <p class="summary">
+          B.Tech Artificial Intelligence &amp; Machine Learning student who builds AI-powered solutions end to end —
+          from cleaning and analyzing datasets to training, testing and deploying machine learning models behind
+          Python web applications. Hands-on with Python, machine learning, NLP and prompt engineering, plus SQL and
+          NoSQL databases, Flask APIs and Git. Strong analytical mindset, eager to contribute to live AI, data and
+          automation projects.
+        </p>
+      </section>
+
+      <section>
+        <h2>Core Competencies</h2>
+        <div class="chips">
+          <span>Python Programming</span><span>Machine Learning</span><span>Data Analysis &amp; Visualization</span>
+          <span>SQL &amp; Databases</span><span>NLP &amp; Prompt Engineering</span><span>Computer Vision</span>
+          <span>Web App Development (Flask)</span><span>Automation Workflows</span><span>Data Structures &amp; Algorithms</span><span>Git &amp; Version Control</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>Projects</h2>
+
+        <div class="item">
+          <div class="h"><strong>Sky Watcher — Aerial Vehicle Detection</strong><em>2024</em></div>
+          <div class="sub">Computer Vision &amp; Automation</div>
+          <ul>
+            <li>Built a computer-vision system that detects and classifies vehicles from aerial footage to analyze traffic flow.</li>
+            <li>Structured the pipeline into reusable detection, tracking and reporting modules for real-time insight.</li>
+          </ul>
+          <div class="tools"><b>Tools:</b> Python, YOLO, OpenCV, Deep Learning</div>
+        </div>
+
+        <div class="item">
+          <div class="h"><strong>Biblio AI — Semantic Book Recommender</strong><em>2023</em></div>
+          <div class="sub">NLP &amp; Machine Learning</div>
+          <ul>
+            <li>Engineered a recommendation engine matching books by meaning using cosine similarity over NLP embeddings.</li>
+            <li>Improved relevance beyond keyword overlap by working in a semantic vector space.</li>
+          </ul>
+          <div class="tools"><b>Tools:</b> Python, NLP, Scikit-learn, Embeddings</div>
+        </div>
+
+        <div class="item">
+          <div class="h"><strong>Project Neer — Water Resource Dashboard</strong><em>2024</em></div>
+          <div class="sub">IoT &amp; Full-Stack Web App</div>
+          <ul>
+            <li>Developed a dashboard pairing live IoT signals with a Flask + MongoDB backend for monitoring and insight.</li>
+            <li>Designed REST APIs and data models to turn sensor streams into decision-ready views.</li>
+          </ul>
+          <div class="tools"><b>Tools:</b> Python, Flask, MongoDB, IoT, REST APIs</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        <div class="item">
+          <div class="h"><strong>B.Tech in Artificial Intelligence &amp; Machine Learning</strong><em>Sep 2023 – Sep 2027</em></div>
+          <div class="sub">Sri Shakthi Institute of Engineering and Technology, Coimbatore</div>
+          <ul><li>CGPA: 8.1 / 10 · Coursework: DSA, DBMS, Python, Machine Learning, NLP, Deep Learning.</li></ul>
+        </div>
+        <div class="item">
+          <div class="h"><strong>Higher Secondary (Class XII)</strong><em>2023</em></div>
+          <div class="sub">Sri Aanoor Vidyalaya Matric Higher Secondary School</div>
+          <ul><li>Percentage: 88%</li></ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Certifications</h2>
+        <div class="certs-list">
+          <p><b>Building LLM Applications With Prompt Engineering</b> — NVIDIA</p>
+          <p><b>Career Essentials in Generative AI</b> — Microsoft</p>
+          <p><b>Intermediate Deep Learning with PyTorch</b> — DataCamp</p>
+          <p><b>Machine Learning (Intermediate)</b> — Kaggle</p>
+          <p><b>The MCP Course</b> — Hugging Face</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Skills</h2>
+        <div class="skills-grid">
+          <p><b>Languages:</b> Python, SQL</p>
+          <p><b>AI / ML:</b> Machine Learning, NLP, Deep Learning, LLMs, Prompt Engineering, OpenAI API</p>
+          <p><b>Data:</b> Cleaning, Analysis, Visualization, Pandas, NumPy</p>
+          <p><b>Frameworks:</b> Flask, Scikit-learn, PyTorch, TensorFlow, OpenCV</p>
+          <p><b>Databases:</b> MySQL, MongoDB</p>
+          <p><b>Web &amp; APIs:</b> REST API design, JSON, custom APIs</p>
+          <p><b>Tools:</b> Git, Version Control, Linux</p>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
