@@ -4,19 +4,44 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#e6e8e6" />
-  <meta name="description" content="Arunesh Waran. AI, ML & Web Application Developer. Explore his work through an original Nokia 3310." />
-  <title>Arunesh Waran | On the Line</title>
-  <link rel="icon" href="data:," />
-  <script type="module" crossorigin src="./assets/index-DfOCNNfP.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-Dscq__IU.css">
+  <title>Arunesh Waran | AI, ML &amp; Web Application Developer</title>
+  <meta name="description" content="Arunesh Waran, AI, ML &amp; web application developer in Coimbatore, India. RAG systems, FastAPI backends and well-tested Python tools, presented on an interactive Nokia 3310." />
+  <meta name="author" content="Arunesh Waran" />
+  <!-- Social previews. og:image uses the GitHub raw URL so it works on any domain. -->
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content="Arunesh Waran | AI, ML &amp; Web Application Developer" />
+  <meta property="og:description" content="RAG systems, FastAPI backends and well-tested Python tools. Explore the portfolio on a working Nokia 3310." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/ANONYMOUSZED-beep/arun-port/main/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Arunesh Waran's portfolio displayed on a blue Nokia 3310" />
+  <meta property="profile:first_name" content="Arunesh" />
+  <meta property="profile:last_name" content="Waran" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <link rel="stylesheet" href="./styles/main.css" />
+  <script type="module" src="./src/main.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Arunesh Waran",
+    "jobTitle": "AI, ML & Web Application Developer",
+    "address": { "@type": "PostalAddress", "addressLocality": "Coimbatore", "addressRegion": "Tamil Nadu", "addressCountry": "IN" },
+    "affiliation": { "@type": "CollegeOrUniversity", "name": "Sri Shakthi Institute of Engineering and Technology" },
+    "knowsAbout": ["Retrieval-augmented generation", "Large language models", "Machine learning", "Computer vision", "Python", "FastAPI", "Next.js", "PostgreSQL"],
+    "sameAs": ["https://www.linkedin.com/in/arunesh-waran-2a6846300/", "https://github.com/ANONYMOUSZED-beep"]
+  }
+  </script>
 </head>
 <body>
   <a class="skip" href="./text.html">Read accessible portfolio</a>
   <main class="exhibit">
     <header class="identity">
-      <span class="edition"><span class="live-dot"></span> PERSONAL PORTFOLIO / 01</span>
+      <span class="edition"><span class="live-dot"></span> PERSONAL PORTFOLIO / 02</span>
       <h1>Arunesh<br /> Waran<span class="name-dot">.</span></h1>
-      <p>AI, ML & Web<br />Application Developer</p>
+      <p>AI, ML &amp; Web<br />Application Developer</p>
       <div class="identity-rule"></div>
       <span class="location">Coimbatore, India</span>
     </header>
@@ -37,7 +62,7 @@
           <button class="physical number" data-key="digit4" aria-label="4 - Education" title="4 - Education"></button>
           <button class="physical number" data-key="digit5" aria-label="5 - Certificates" title="5 - Certificates"></button>
           <button class="physical number" data-key="digit6" aria-label="6 - Contact" title="6 - Contact"></button>
-          <button class="physical number" data-key="digit7" aria-label="7 - Extras" title="7 - Extras"></button>
+          <button class="physical number" data-key="digit7" aria-label="7 - Extras: Ask Arun and Snake II" title="7 - Extras"></button>
           <button class="physical number" data-key="digit8" aria-label="8 - Help" title="8 - Help"></button>
           <button class="physical number" data-key="digit9" aria-label="9 - Phone info" title="9 - Phone info"></button>
           <button class="physical number" data-key="sound" aria-label="Star - Toggle sound" title="Star - Sound"></button>
@@ -48,13 +73,32 @@
       </div>
       <p class="first-hint" id="hint">Use arrow keys or phone buttons. <span>Enter to select.</span></p>
     </section>
-    <aside class="specimen" aria-label="Device identification">
-      <span class="specimen-index">OBJECT 001</span>
-      <h2>Nokia 3310</h2>
-      <p>Connecting, since 2000.</p>
-      <div class="specimen-rule"></div>
-      <dl><div><dt>DISPLAY</dt><dd>84 &times; 48 px</dd></div><div><dt>INTERFACE</dt><dd>Entirely tactile</dd></div></dl>
-      <span class="specimen-note">A small screen.<br />A whole body of work.</span>
+    <aside class="quickview" aria-labelledby="qv-status">
+      <span class="qv-label"><span class="live-dot"></span> STATUS</span>
+      <h2 id="qv-status">Open to AI, data &amp; automation projects</h2>
+      <p class="qv-meta">B.Tech AI &amp; ML, class of 2027<br />CGPA 8.1 &middot; Coimbatore, India</p>
+      <div class="qv-rule"></div>
+      <span class="qv-label">FEATURED WORK</span>
+      <ol class="featured">
+        <li>
+          <a class="qv-project" href="#projects/ai-assistant/topics/0" data-phone-link>AI Developer Assistant</a>
+          <small>RAG + LLM &middot; FastAPI &middot; Next.js</small>
+          <a class="qv-source" href="https://github.com/ANONYMOUSZED-beep/ai-dev-assistant" target="_blank" rel="noopener noreferrer">Code<span class="sr-only"> for AI Developer Assistant (opens in a new tab)</span> <i data-lucide="arrow-up-right"></i></a>
+        </li>
+        <li>
+          <a class="qv-project" href="#projects/replayguard/topics/0" data-phone-link>ReplayGuard</a>
+          <small>Python CLI &middot; 90%+ test coverage</small>
+          <a class="qv-source" href="https://github.com/ANONYMOUSZED-beep/ReplayGuard" target="_blank" rel="noopener noreferrer">Code<span class="sr-only"> for ReplayGuard (opens in a new tab)</span> <i data-lucide="arrow-up-right"></i></a>
+        </li>
+      </ol>
+      <div class="qv-rule"></div>
+      <div class="qv-actions">
+        <a class="qv-btn primary" href="#app/message" data-phone-link><i data-lucide="message-square"></i> Message me</a>
+        <a class="qv-btn" href="./resume.pdf" data-resume hidden download><i data-lucide="file-text"></i> Resume</a>
+        <a class="qv-btn" href="https://www.linkedin.com/in/arunesh-waran-2a6846300/" target="_blank" rel="noopener noreferrer">LinkedIn <i data-lucide="arrow-up-right"></i></a>
+        <a class="qv-btn" href="https://github.com/ANONYMOUSZED-beep" target="_blank" rel="noopener noreferrer">GitHub <i data-lucide="arrow-up-right"></i></a>
+      </div>
+      <p class="qv-note">Press <a class="qv-key" href="#extras/0" data-phone-link aria-label="7, open Extras">7</a> on the phone for Ask Arun and Snake II.</p>
     </aside>
   </main>
   <footer class="page-footer">

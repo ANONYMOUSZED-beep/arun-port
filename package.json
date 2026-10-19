@@ -1,0 +1,15 @@
+{
+  "name": "arun-port",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Arunesh Waran's portfolio on an interactive Nokia 3310.",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "build:text": "node scripts/build-text.mjs",
+    "test": "node --test && node scripts/build-text.mjs --check"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
